@@ -2,24 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class Counter extends Component {
-  
-// changeHandler = (action, value) => {
-//   // eslint-disable-next-line 
-//    switch(action) {
-//        case 'inc':
-//            this.setState( (prevState) => {return {count: prevState.count + 1 }})
-//            break;
-//        case 'dec':
-//            this.setState( (prevState) => {return {count: prevState.count - 1 }})
-//            break;
-//         case 'add':
-//            this.setState( (prevState) => {return {count: prevState.count + value }})
-//            break;
-//         case 'rem':
-//            this.setState( (prevState) => {return {count: prevState.count - value }})
-//            break;
-//    }
-// }
+
    render() {
        return(
            <div className='num'>
@@ -29,6 +12,13 @@ class Counter extends Component {
                    <button onClick={this.props.onDecCounter}>Remove 1</button>
                    <button onClick={this.props.onAddCounter}>Add 5</button>
                    <button onClick={this.props.onRemCounter}>Remove 5</button>
+                   <button onClick={this.props.onStoreResult}>Store value</button>
+                
+                   <ul>
+                       {this.props.storedResult.map(item => (
+                        <li key={item.id}>{item.value}</li>
+                       ))}
+                   </ul>
                </div>
            </div>
        );
@@ -37,7 +27,8 @@ class Counter extends Component {
 
 const mapStateToProps = state => {
     return {
-        count: state.counter
+        count: state.counter,
+        storedResult: state.results
     }
 }
 
@@ -46,7 +37,9 @@ const mapDispatchToProps = dispatch=> {
         onIncCounter: () => dispatch ({type: 'INCREASE'}),
         onDecCounter: () => dispatch ({type: 'DECREASE'}),
         onAddCounter: () => dispatch ({type: 'ADD', value:5}),
-        onRemCounter: () => dispatch ({type: 'REMOVE', value:5})
+        onRemCounter: () => dispatch ({type: 'REMOVE', value:5}),
+        onStoreResult: () => dispatch ({type: 'STORE_RESULT'}),
+        onDeleteResult: () => dispatch ({type: 'DELETE_RESULT'})
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Counter);
