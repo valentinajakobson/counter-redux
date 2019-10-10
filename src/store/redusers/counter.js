@@ -1,21 +1,20 @@
+import * as actionTypes from '../actions';
+
 const initialState = {
-    counter:0,
-    results:[]
+    counter:0
 }
 
 const reducer = (state = initialState, action) => {
      // eslint-disable-next-line 
     switch (action.type){
-        case 'INCREASE':
+        case actionTypes.INCREASE:
         return { ...state, counter: state.counter + 1};
-        case 'DECREASE':
+        case actionTypes.DECREASE:
         return {...state, counter: state.counter - 1};
-        case  'ADD': 
+        case  actionTypes.ADD: 
         return {...state, counter: state.counter + action.value};
-        case 'REMOVE':
+        case actionTypes.REMOVE:
         return {...state, counter: state.counter - action.value};
-        case 'STORE_RESULT':
-        return {...state, results: state.results.concat({id: new Date(), value: state.counter})};
     }
     return state;
 }
